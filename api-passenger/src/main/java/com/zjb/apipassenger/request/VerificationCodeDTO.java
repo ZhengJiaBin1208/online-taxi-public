@@ -10,4 +10,12 @@ package com.zjb.apipassenger.request;
 public class VerificationCodeDTO {
 
     private String passengePhone;
+
+    public String getPassengePhone() {
+        return passengePhone;
+    }
+
+    public void setPassengePhone(String passengePhone) {
+        this.passengePhone = passengePhone;
+    }
 }

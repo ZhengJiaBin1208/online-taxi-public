@@ -1,5 +1,7 @@
 package com.zjb.apipassenger.request;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
 /**
  * @ClassName VerificationCodeDTO
  * @Description TODO

@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>api-passenger</module>
+        <module>service-verificationcode</module>
     </modules>
 
     <properties>
@@ -28,6 +29,20 @@
             <artifactId>json-lib</artifactId>
             <version>2.4</version>
             <classifier>jdk15</classifier>
+        </dependency>
+
+        <!-- add nacos config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>2021.1</version>
+        </dependency>
+
+        <!-- add nacos discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2021.1</version>
         </dependency>
     </dependencies>
 

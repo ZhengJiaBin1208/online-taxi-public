@@ -1,5 +1,7 @@
 package com.zjb.serviceverificationcode.controller;
 
+import com.zjb.internalcommon.dto.ResponseResult;
+import com.zjb.response.NumberCodeResponse;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,21 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class NumberCodeController {
 
     @GetMapping("/numberCode/{size}")
-    public String numberCode(@PathVariable("size") int size){
+    public ResponseResult numberCode(@PathVariable("size") int size){
         System.out.println("size: "+ size);
-
-        JSONObject result = new JSONObject();
-        JSONObject data = new JSONObject();
-        int numberCode = (int) (Math.random() * Math.pow(10,size));
+        int numberCode = (int) ((Math.random() * 9 + 1) * Math.pow(10,size-1));
         System.out.println("numberCode:"+numberCode);
-        data.put("numberCode",numberCode);
-        result.put("code",1);
-        result.put("message","success");
-        result.put("data",data);
-        return result.toString();
+
+        NumberCodeResponse numberCodeResponse = new NumberCodeResponse();
+        numberCodeResponse.setNumberCode(numberCode);
+        return ResponseResult.success(numberCodeResponse);
     }
 
-    public static void main(String[] args) {
-        System.out.println((int)(Math.random() * 1000000));
-    }
 }

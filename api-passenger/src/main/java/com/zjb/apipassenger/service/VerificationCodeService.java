@@ -1,5 +1,7 @@
 package com.zjb.apipassenger.service;
 
+import com.zjb.internalcommon.dto.ResponseResult;
+
 /**
  * @ClassName VerificationCodeService
  * @Description TODO
@@ -16,5 +18,5 @@ public interface VerificationCodeService {
      * @param passengerPhone 手机号
      * @return java.lang.String
      **/
-    String generatorCode(String passengerPhone);
+    ResponseResult generatorCode(String passengerPhone);
 }

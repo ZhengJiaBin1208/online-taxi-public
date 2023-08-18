@@ -2,7 +2,6 @@ package com.zjb.serviceverificationcode.controller;
 
 import com.zjb.internalcommon.dto.ResponseResult;
 import com.zjb.response.NumberCodeResponse;
-import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

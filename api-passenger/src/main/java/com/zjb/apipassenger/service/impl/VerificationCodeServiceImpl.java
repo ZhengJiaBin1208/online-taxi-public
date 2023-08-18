@@ -8,7 +8,11 @@ import com.zjb.internalcommon.dto.ResponseResult;
 import com.zjb.response.NumberCodeResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
+
 /**
  * @ClassName VerificationCodeServiceImpl
  * @Description TODO
@@ -18,6 +22,12 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class VerificationCodeServiceImpl  implements VerificationCodeService {
+
+    // 乘客验证码的前缀
+    private String verificationCodePrefix = "passenger-verification-code-";
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     private ServiceVefificationcodeClient serviceVefificationcodeClient;
@@ -31,15 +41,20 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
     @Override
     public ResponseResult generatorCode(String passengerPhone) {
         // 调用验证码服务，获取验证码
-        System.out.println("调用验证码服务，获取验证码");
-
         ResponseResult<NumberCodeResponse> numberCodeResponse = serviceVefificationcodeClient.getNumberCode(6);
         System.out.println("numberCodeResponse"+JSON.toJSONString(numberCodeResponse));
+        int numberCode = numberCodeResponse.getData().getNumberCode();
 
         // 存入redis
         System.out.println("存入redis");
+        // key,value,过期时间
+        String key = verificationCodePrefix + passengerPhone;
+        // 存入redis
+        stringRedisTemplate.opsForValue().set(key, String.valueOf(numberCode), 2, TimeUnit.MINUTES);
+
+        // 通过短信服务商，将对应的验证码发送到手机上，阿里云短信服务、腾讯短信服务、华信、容联
 
         // 返回值
-        return numberCodeResponse;
+        return ResponseResult.success("");
     }
 }

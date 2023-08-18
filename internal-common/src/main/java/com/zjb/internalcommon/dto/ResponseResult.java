@@ -20,6 +20,16 @@ public class ResponseResult<T> {
 
     /**
      * @author zhengjiabin
+     * @description 成功响应方法
+     * @date 2023/8/18 17:21
+     * @return com.zjb.internalcommon.dto.ResponseResult
+     **/
+    public static <T>ResponseResult success() {
+        return new ResponseResult().setCode(CommonStatusEnum.SUCCESS.getCode()).setMessage(CommonStatusEnum.SUCCESS.getValue());
+    }
+
+    /**
+     * @author zhengjiabin
      * @description 默认成功的响应方法
      * @date 2023/8/16 10:34
      * @param data 返回的data对象

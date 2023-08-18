@@ -1,6 +1,7 @@
 package com.zjb.apipassenger.remote;
 
 import com.zjb.internalcommon.dto.ResponseResult;
+import com.zjb.response.NumberCodeResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,5 +17,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ServiceVefificationcodeClient {
 
     @GetMapping("/numberCode/{size}")
-    ResponseResult getNumberCode(@PathVariable("size") int size);
+    ResponseResult<NumberCodeResponse> getNumberCode(@PathVariable("size") int size);
 }

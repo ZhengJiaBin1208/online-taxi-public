@@ -44,9 +44,6 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
         ResponseResult<NumberCodeResponse> numberCodeResponse = serviceVefificationcodeClient.getNumberCode(6);
         System.out.println("numberCodeResponse"+JSON.toJSONString(numberCodeResponse));
         int numberCode = numberCodeResponse.getData().getNumberCode();
-
-        // 存入redis
-        System.out.println("存入redis");
         // key,value,过期时间
         String key = verificationCodePrefix + passengerPhone;
         // 存入redis

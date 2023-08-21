@@ -1,6 +1,7 @@
 package com.zjb.apipassenger.request;
 
 import jdk.nashorn.internal.objects.annotations.Getter;
+import lombok.Data;
 
 /**
  * @ClassName VerificationCodeDTO
@@ -9,15 +10,11 @@ import jdk.nashorn.internal.objects.annotations.Getter;
  * @Date 2023/8/11 18:01
  * @Version 1.0
  **/
+@Data
 public class VerificationCodeDTO {
 
-    private String passengePhone;
+    private String passengerPhone;
 
-    public String getPassengePhone() {
-        return passengePhone;
-    }
+    private String verificationCode;
 
-    public void setPassengePhone(String passengePhone) {
-        this.passengePhone = passengePhone;
-    }
 }

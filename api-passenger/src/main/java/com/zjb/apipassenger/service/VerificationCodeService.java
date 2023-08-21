@@ -19,4 +19,14 @@ public interface VerificationCodeService {
      * @return java.lang.String
      **/
     ResponseResult generatorCode(String passengerPhone);
+
+    /**
+     * @author zhengjiabin
+     * @description 验证验证码
+     * @date 2023/8/21 14:12
+     * @param passengerPhone 手机号
+     * @param verificationCode 验证码
+     * @return com.zjb.internalcommon.dto.ResponseResult
+     **/
+    ResponseResult checkCode(String passengerPhone,String verificationCode);
 }

@@ -1,11 +1,10 @@
-package com.zjb.apipassenger.request;
+package com.zjb.request;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.Data;
 
 /**
  * @ClassName VerificationCodeDTO
- * @Description TODO
+ * @Description 用户信息DTO
  * @Author zhengjiabin
  * @Date 2023/8/11 18:01
  * @Version 1.0

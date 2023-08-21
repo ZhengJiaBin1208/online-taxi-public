@@ -29,15 +29,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- 引入internal-common -->
-		<dependency>
-			<groupId>com.zjb</groupId>
-			<artifactId>internal-common</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

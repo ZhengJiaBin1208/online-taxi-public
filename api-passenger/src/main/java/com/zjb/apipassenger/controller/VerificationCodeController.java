@@ -1,13 +1,12 @@
 package com.zjb.apipassenger.controller;
 
-import com.zjb.apipassenger.request.VerificationCodeDTO;
 import com.zjb.apipassenger.service.VerificationCodeService;
 import com.zjb.internalcommon.dto.ResponseResult;
+import com.zjb.request.VerificationCodeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

@@ -2,8 +2,11 @@ package com.zjb.servicepassengeruser.controller;
 
 import com.zjb.internalcommon.dto.ResponseResult;
 import com.zjb.request.VerificationCodeDTO;
+import com.zjb.servicepassengeruser.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName UserController
@@ -12,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @Date 2023/8/21 18:03
  * @Version 1.0
  **/
+@RestController
 public class UserController {
+
+    @Autowired
+     private UserService userService;
 
     /**
      * @author zhengjiabin
@@ -21,11 +28,12 @@ public class UserController {
      * @param verificationCodeDTO 用户信息DTO
      * @return com.zjb.internalcommon.dto.ResponseResult
      **/
-    @PostMapping("/user")
-    public ResponseResult loginOrReg(@RequestBody VerificationCodeDTO verificationCodeDTO){
+    @PostMapping("user")
+    public ResponseResult loginOrRegister(@RequestBody VerificationCodeDTO verificationCodeDTO){
 
         String passengerPhone = verificationCodeDTO.getPassengerPhone();
         System.out.println("passengerPhone: "+passengerPhone);
-        return ResponseResult.success();
+        userService.loginOrRegister(passengerPhone);
+        return userService.loginOrRegister(passengerPhone);
     }
 }

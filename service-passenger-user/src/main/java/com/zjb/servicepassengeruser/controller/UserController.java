@@ -35,5 +35,6 @@ public class UserController {
         System.out.println("passengerPhone: "+passengerPhone);
         userService.loginOrRegister(passengerPhone);
         return userService.loginOrRegister(passengerPhone);
+
     }
 }

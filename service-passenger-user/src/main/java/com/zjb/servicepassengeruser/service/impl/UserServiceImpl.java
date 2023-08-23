@@ -38,12 +38,19 @@ public class UserServiceImpl implements UserService {
         HashMap<String, Object> map = new HashMap<>();
         map.put("passenger_phone",passengerPhone);
         List<PassengerUser> passengerUsers = passengerUserMapper.selectByMap(map);
-        System.out.println(passengerUsers.size() == 0 ? "无记录":passengerUsers.get(0).getPassengerName());
-
 
         // 判断用户信息是否存在
+        if (passengerUsers.size() == 0) {
+            // 如果不存在则插入用户信息
+            PassengerUser passengerUser = new PassengerUser();
+            passengerUser.setPassengerName("张三");
+            passengerUser.setPassengerPhone(passengerPhone);
+            int insert = passengerUserMapper.insert(passengerUser);
+            if (insert > 0){
+                System.out.println(passengerUser+"用户插入成功");
+            }
+        }
 
-        // 如果不存在则插入用户信息
         return ResponseResult.success();
     }
 }

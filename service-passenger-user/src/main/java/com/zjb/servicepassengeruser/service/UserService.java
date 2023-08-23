@@ -1,8 +1,7 @@
 package com.zjb.servicepassengeruser.service;
 
 import com.zjb.internalcommon.dto.ResponseResult;
-import com.zjb.request.VerificationCodeDTO;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 /**
  * @ClassName UserService

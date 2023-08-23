@@ -33,8 +33,8 @@ public class UserController {
 
         String passengerPhone = verificationCodeDTO.getPassengerPhone();
         System.out.println("passengerPhone: "+passengerPhone);
-        userService.loginOrRegister(passengerPhone);
-        return userService.loginOrRegister(passengerPhone);
+        ResponseResult responseResult = userService.loginOrRegister(passengerPhone);
+        return responseResult;
 
     }
 }

@@ -3,10 +3,12 @@ package com.zjb.apipassenger.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.common.utils.StringUtils;
+import com.zjb.apipassenger.remote.ServicePassengerUserClient;
 import com.zjb.apipassenger.remote.ServiceVefificationcodeClient;
 import com.zjb.apipassenger.service.VerificationCodeService;
 import com.zjb.internalcommon.CommonStatusEnum;
 import com.zjb.internalcommon.dto.ResponseResult;
+import com.zjb.request.VerificationCodeDTO;
 import com.zjb.response.NumberCodeResponse;
 import com.zjb.response.TokenResponse;
 import io.netty.util.internal.StringUtil;
@@ -37,6 +39,9 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
 
     @Autowired
     private ServiceVefificationcodeClient serviceVefificationcodeClient;
+
+    @Autowired
+    ServicePassengerUserClient servicePassengerUserClient;
 
     /**
      * @param passengerPhone 手机号
@@ -98,6 +103,10 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
             return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_ERROR.getCode(),CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
         }
         // 3.如果原来没有用户插入，有用户则查询
+        VerificationCodeDTO verificationCodeDTO = new VerificationCodeDTO();
+        verificationCodeDTO.setPassengerPhone(passengerPhone);
+        servicePassengerUserClient.loginOrRegister(verificationCodeDTO);
+
 //        generatorCode(passengerPhone);
         // 4.生成token
         TokenResponse tokenResponse = new TokenResponse();

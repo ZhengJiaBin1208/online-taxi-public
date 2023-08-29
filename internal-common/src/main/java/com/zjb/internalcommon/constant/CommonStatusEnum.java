@@ -1,4 +1,4 @@
-package com.zjb.internalcommon;
+package com.zjb.internalcommon.constant;
 
 import lombok.Data;
 import lombok.Getter;

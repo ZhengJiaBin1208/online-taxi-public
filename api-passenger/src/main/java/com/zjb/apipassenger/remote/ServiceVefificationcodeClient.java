@@ -1,7 +1,7 @@
 package com.zjb.apipassenger.remote;
 
 import com.zjb.internalcommon.dto.ResponseResult;
-import com.zjb.response.NumberCodeResponse;
+import com.zjb.internalcommon.response.NumberCodeResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

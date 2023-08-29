@@ -1,4 +1,4 @@
-package com.zjb.request;
+package com.zjb.internalcommon.request;
 
 import lombok.Data;
 

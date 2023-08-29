@@ -1,6 +1,6 @@
 package com.zjb.internalcommon.dto;
 
-import com.zjb.internalcommon.CommonStatusEnum;
+import com.zjb.internalcommon.constant.CommonStatusEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

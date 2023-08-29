@@ -1,10 +1,11 @@
-package com.zjb.util;
+package com.zjb.internalcommon.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zjb.internalcommon.dto.TokenResult;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,15 +24,20 @@ public class JwtUtils {
     // 盐值
     private static final String SIGN="ASDzjb~!@#$$";
 
-    // JWT_KEY
-    private static final String JWT_KEY="passengerPhone";
+    // JWT_KEY_PHONE
+    private static final String JWT_KEY_PHONE ="phone";
+
+    // 乘客端是1，司机端是2
+    private static final String JWT_KEY_IDENTITY ="identity";
+
 
 
     // 生成token
-    public static String generatorToken(String passengerPhone){
+    public static String generatorToken(String phone, String identity){
         // 整合map
         HashMap<String, String> map = new HashMap<>();
-        map.put(JWT_KEY,passengerPhone);
+        map.put(JWT_KEY_PHONE,phone);
+        map.put(JWT_KEY_IDENTITY,identity);
 
         // token过期时间
         Calendar calendar = Calendar.getInstance();
@@ -56,14 +62,16 @@ public class JwtUtils {
     }
 
     // 解析token
-    public static String parseToken(String token){
+    public static TokenResult parseToken(String token){
         DecodedJWT verify = JWT.require(Algorithm.HMAC512(SIGN)).build().verify(token);
-        Claim claim = verify.getClaim(JWT_KEY);
-        return claim.asString();
+        TokenResult tokenResult = new TokenResult();
+        tokenResult.setPhone(verify.getClaim(JWT_KEY_PHONE).asString());
+        tokenResult.setIdentity(verify.getClaim(JWT_KEY_IDENTITY).asString());
+        return tokenResult;
     }
     public static void main(String[] args) {
         HashMap<String, String> map = new HashMap<>();
-        String token = generatorToken("18513516300");
+        String token = generatorToken("18513516300","1");
         System.out.println(token);
         System.out.println(parseToken(token));
     }

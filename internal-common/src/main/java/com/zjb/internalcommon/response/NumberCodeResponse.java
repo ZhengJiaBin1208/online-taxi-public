@@ -1,4 +1,4 @@
-package com.zjb.response;
+package com.zjb.internalcommon.response;
 
 import lombok.Data;
 

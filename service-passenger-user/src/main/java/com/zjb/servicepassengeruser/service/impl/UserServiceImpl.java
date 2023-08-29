@@ -1,7 +1,6 @@
 package com.zjb.servicepassengeruser.service.impl;
 
 import com.zjb.internalcommon.dto.ResponseResult;
-import com.zjb.request.VerificationCodeDTO;
 import com.zjb.servicepassengeruser.dto.PassengerUser;
 import com.zjb.servicepassengeruser.mapper.PassengerUserMapper;
 import com.zjb.servicepassengeruser.service.UserService;

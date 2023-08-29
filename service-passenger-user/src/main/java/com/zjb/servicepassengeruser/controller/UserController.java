@@ -1,7 +1,7 @@
 package com.zjb.servicepassengeruser.controller;
 
 import com.zjb.internalcommon.dto.ResponseResult;
-import com.zjb.request.VerificationCodeDTO;
+import com.zjb.internalcommon.request.VerificationCodeDTO;
 import com.zjb.servicepassengeruser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

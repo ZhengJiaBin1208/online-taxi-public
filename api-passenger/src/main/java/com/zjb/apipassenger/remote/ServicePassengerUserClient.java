@@ -1,7 +1,7 @@
 package com.zjb.apipassenger.remote;
 
 import com.zjb.internalcommon.dto.ResponseResult;
-import com.zjb.request.VerificationCodeDTO;
+import com.zjb.internalcommon.request.VerificationCodeDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

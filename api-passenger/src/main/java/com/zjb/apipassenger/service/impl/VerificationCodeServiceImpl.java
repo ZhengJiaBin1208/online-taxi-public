@@ -1,19 +1,17 @@
 package com.zjb.apipassenger.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.common.utils.StringUtils;
 import com.zjb.apipassenger.remote.ServicePassengerUserClient;
 import com.zjb.apipassenger.remote.ServiceVefificationcodeClient;
 import com.zjb.apipassenger.service.VerificationCodeService;
-import com.zjb.internalcommon.CommonStatusEnum;
+import com.zjb.internalcommon.constant.CommonStatusEnum;
+import com.zjb.internalcommon.constant.IdentityConstant;
 import com.zjb.internalcommon.dto.ResponseResult;
-import com.zjb.request.VerificationCodeDTO;
-import com.zjb.response.NumberCodeResponse;
-import com.zjb.response.TokenResponse;
-import io.netty.util.internal.StringUtil;
-import jdk.nashorn.internal.parser.Token;
-import lombok.extern.slf4j.Slf4j;
+import com.zjb.internalcommon.request.VerificationCodeDTO;
+import com.zjb.internalcommon.response.NumberCodeResponse;
+import com.zjb.internalcommon.response.TokenResponse;
+import com.zjb.internalcommon.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -109,8 +107,9 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
 
 //        generatorCode(passengerPhone);
         // 4.生成token
+        String token = JwtUtils.generatorToken(passengerPhone, IdentityConstant.PASSENGER_IDENTITY);
         TokenResponse tokenResponse = new TokenResponse();
-        tokenResponse.setToken(String.valueOf(UUID.randomUUID()));
+        tokenResponse.setToken(token);
         return ResponseResult.success(tokenResponse);
     }
 }

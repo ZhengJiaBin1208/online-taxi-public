@@ -1,5 +1,6 @@
 package com.zjb.apipassenger.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+
 
 /**
  * @ClassName JwtInterceptor
@@ -68,7 +70,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         if (!result){
             PrintWriter out = response.getWriter();
-            out.print(JSONObject.parseObject(ResponseResult.fail(resultString).toString()));
+            out.print(JSON.toJSON(ResponseResult.fail(resultString)));
         }
         return result;
     }

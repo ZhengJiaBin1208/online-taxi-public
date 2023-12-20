@@ -1,12 +1,17 @@
 package com.zjb.apipassenger.interceptor;
 
+import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.zjb.internalcommon.dto.ResponseResult;
+import com.zjb.internalcommon.dto.TokenResult;
 import com.zjb.internalcommon.util.JwtUtils;
+import com.zjb.internalcommon.util.RedisPrefixUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -24,6 +29,8 @@ import java.io.PrintWriter;
  **/
 public class JwtInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * Interception point before the execution of a handler. Called after
@@ -52,8 +59,9 @@ public class JwtInterceptor implements HandlerInterceptor {
         String resultString = "";
 
         String token = request.getHeader("Authorization");
+        TokenResult tokenResult = null;
         try {
-            JwtUtils.parseToken(token);
+             tokenResult = JwtUtils.parseToken(token);
         }catch (SignatureVerificationException e){
             resultString = "token sign error";
             result = false;
@@ -67,6 +75,22 @@ public class JwtInterceptor implements HandlerInterceptor {
             resultString = "token invalid";
             result = false;
         }
+        if (null == tokenResult) {
+            resultString = "token invalid";
+            result = false;
+        }else {
+            String phone = tokenResult.getPhone();
+            String identity = tokenResult.getIdentity();
+
+            String tokenKey = RedisPrefixUtils.generatorTokenKey(phone, identity);
+            String redisToken = stringRedisTemplate.opsForValue().get(tokenKey);
+            if (StringUtils.isBlank(redisToken) || !redisToken.trim().equals(token.trim())) {
+                resultString = "token invalid";
+                result = false;
+            }
+
+        }
+
 
         if (!result){
             PrintWriter out = response.getWriter();

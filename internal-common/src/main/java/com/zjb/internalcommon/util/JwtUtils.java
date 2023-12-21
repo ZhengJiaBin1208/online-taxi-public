@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zjb.internalcommon.constant.TokenTypeConstant;
 import com.zjb.internalcommon.dto.TokenResult;
 
 import java.util.Calendar;
@@ -31,13 +32,18 @@ public class JwtUtils {
     private static final String JWT_KEY_IDENTITY ="identity";
 
 
+    private static final String JWT_TOKEN_TYPE ="tokenType";
+
+
 
     // 生成token
-    public static String generatorToken(String phone, String identity){
+    public static String generatorToken(String phone, String identity, String tokenType){
         // 整合map
         HashMap<String, String> map = new HashMap<>();
         map.put(JWT_KEY_PHONE,phone);
         map.put(JWT_KEY_IDENTITY,identity);
+        map.put(JWT_TOKEN_TYPE,tokenType);
+
 
         // token过期时间
         Calendar calendar = Calendar.getInstance();
@@ -71,7 +77,7 @@ public class JwtUtils {
     }
     public static void main(String[] args) {
         HashMap<String, String> map = new HashMap<>();
-        String token = generatorToken("18513516300","1");
+        String token = generatorToken("18513516300","1", TokenTypeConstant.ACCESS_TOKEN);
         System.out.println(token);
         System.out.println(parseToken(token));
     }

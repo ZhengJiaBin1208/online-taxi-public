@@ -23,4 +23,9 @@ public class TokenResult {
      *  2:司机端
      */
     private String identity;
+
+    /**
+     * token类型
+     */
+    private String tokenType;
 }

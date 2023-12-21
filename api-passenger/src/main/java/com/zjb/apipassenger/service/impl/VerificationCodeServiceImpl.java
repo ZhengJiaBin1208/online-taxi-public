@@ -7,6 +7,7 @@ import com.zjb.apipassenger.remote.ServiceVefificationcodeClient;
 import com.zjb.apipassenger.service.VerificationCodeService;
 import com.zjb.internalcommon.constant.CommonStatusEnum;
 import com.zjb.internalcommon.constant.IdentityConstant;
+import com.zjb.internalcommon.constant.TokenTypeConstant;
 import com.zjb.internalcommon.dto.ResponseResult;
 import com.zjb.internalcommon.request.VerificationCodeDTO;
 import com.zjb.internalcommon.response.NumberCodeResponse;
@@ -96,13 +97,20 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
 
 //        generatorCode(passengerPhone);
         // 4.生成token
-        String token = JwtUtils.generatorToken(passengerPhone, IdentityConstant.PASSENGER_IDENTITY);
+        String accessToken = JwtUtils.generatorToken(passengerPhone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.ACCESS_TOKEN);
+        String refreshToken = JwtUtils.generatorToken(passengerPhone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.REFRESH_TOKEN);
+
         // 将token存到redis当中
-        String tokenKey = RedisPrefixUtils.generatorTokenKey(passengerPhone, IdentityConstant.PASSENGER_IDENTITY);
-        stringRedisTemplate.opsForValue().set(tokenKey , token , 30 , TimeUnit.DAYS);
+        String accessTokenKey = RedisPrefixUtils.generatorTokenKey(passengerPhone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.ACCESS_TOKEN);
+        String refreshTokenKey = RedisPrefixUtils.generatorTokenKey(passengerPhone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.REFRESH_TOKEN);
+
+        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 30 , TimeUnit.DAYS);
+        stringRedisTemplate.opsForValue().set(refreshTokenKey , refreshToken , 31 , TimeUnit.DAYS);
+
         // 响应
         TokenResponse tokenResponse = new TokenResponse();
-        tokenResponse.setToken(token);
+        tokenResponse.setAccessToken(accessToken);
+        tokenResponse.setRefreshToken(refreshToken);
         return ResponseResult.success(tokenResponse);
     }
 }

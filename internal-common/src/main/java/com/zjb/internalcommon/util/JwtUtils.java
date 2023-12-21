@@ -73,6 +73,7 @@ public class JwtUtils {
         TokenResult tokenResult = new TokenResult();
         tokenResult.setPhone(verify.getClaim(JWT_KEY_PHONE).asString());
         tokenResult.setIdentity(verify.getClaim(JWT_KEY_IDENTITY).asString());
+        tokenResult.setTokenType(verify.getClaim(JWT_TOKEN_TYPE).asString());
         return tokenResult;
     }
     public static void main(String[] args) {

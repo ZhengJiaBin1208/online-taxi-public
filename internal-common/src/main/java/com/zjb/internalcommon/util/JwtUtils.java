@@ -34,6 +34,7 @@ public class JwtUtils {
 
     private static final String JWT_TOKEN_TYPE ="tokenType";
 
+    private static final String JWT_TOKEN_TIME ="tokenTime";
 
 
     // 生成token
@@ -49,6 +50,7 @@ public class JwtUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 1);
         Date date = calendar.getTime();
+        map.put(JWT_TOKEN_TIME, date.toString());
 
         JWTCreator.Builder builder = JWT.create();
         // 整合map

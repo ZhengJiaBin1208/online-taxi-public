@@ -65,8 +65,11 @@ public class TokenServiceImpl implements TokenService {
         // 将token存到redis当中
         String accessTokenKey = RedisPrefixUtils.generatorTokenKey(phone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.ACCESS_TOKEN);
 
-        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 30 , TimeUnit.DAYS);
-        stringRedisTemplate.opsForValue().set(tokenKey , refreshToken , 31 , TimeUnit.DAYS);
+//        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 30 , TimeUnit.DAYS);
+//        stringRedisTemplate.opsForValue().set(tokenKey , refreshToken , 31 , TimeUnit.DAYS);
+
+        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 10 , TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(tokenKey , newRefreshToken , 30 , TimeUnit.SECONDS);
 
         // 响应
         TokenResponse tokenResponse = new TokenResponse();

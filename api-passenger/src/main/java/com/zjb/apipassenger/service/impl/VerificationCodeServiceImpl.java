@@ -104,8 +104,11 @@ public class VerificationCodeServiceImpl  implements VerificationCodeService {
         String accessTokenKey = RedisPrefixUtils.generatorTokenKey(passengerPhone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.ACCESS_TOKEN);
         String refreshTokenKey = RedisPrefixUtils.generatorTokenKey(passengerPhone, IdentityConstant.PASSENGER_IDENTITY, TokenTypeConstant.REFRESH_TOKEN);
 
-        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 30 , TimeUnit.DAYS);
-        stringRedisTemplate.opsForValue().set(refreshTokenKey , refreshToken , 31 , TimeUnit.DAYS);
+//        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 30 , TimeUnit.DAYS);
+//        stringRedisTemplate.opsForValue().set(refreshTokenKey , refreshToken , 31 , TimeUnit.DAYS);
+
+        stringRedisTemplate.opsForValue().set(accessTokenKey , accessToken , 10 , TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(refreshTokenKey , refreshToken , 30 , TimeUnit.SECONDS);
 
         // 响应
         TokenResponse tokenResponse = new TokenResponse();
